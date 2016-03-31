@@ -35,6 +35,7 @@ import com.adobe.pdfjt.services.digsig.cryptoprovider.JCEProvider;
 import com.adobe.pdfjt.services.digsig.spi.CryptoContext;
 import com.adobe.pdfjt.services.xfa.XFAService;
 import com.adobe.pdfjt.test.util.ApplicationUtils;
+import com.adobe.pdfjt.test.util.DocumentUtils;
 
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
@@ -142,7 +143,7 @@ public class HsmCertifyDocument {
 
         try {
             // Get the PDF file to sign.
-            pdfDoc = SampleFileServices.loadPDFDocument(inputFile.getPath());
+            pdfDoc = DocumentUtils.openPdfDocument(inputFile.getPath());
 
             // Create an output file to hold the signed PDF data.
             final File outputFile = new File(outputFilePath);
