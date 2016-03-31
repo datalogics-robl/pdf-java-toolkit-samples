@@ -34,12 +34,12 @@ import com.adobe.pdfjt.services.digsig.SignatureOptionsDocMDP;
 import com.adobe.pdfjt.services.digsig.cryptoprovider.JCEProvider;
 import com.adobe.pdfjt.services.digsig.spi.CryptoContext;
 import com.adobe.pdfjt.services.xfa.XFAService;
-import com.adobe.pdfjt.test.util.ApplicationUtils;
 import com.adobe.pdfjt.test.util.DocumentUtils;
 
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
@@ -332,8 +332,8 @@ public class HsmCertifyDocument {
         if (line.hasOption(HELP) || !line.hasOption(INPUT)
             || !line.hasOption(PASSWORD) || !line.hasOption(KEY)
             || !line.hasOption(CERT)) {
-            ApplicationUtils.showHelp(options,
-                                      HsmCertifyDocument.class.toString());
+            final HelpFormatter formatter = new HelpFormatter();
+            formatter.printHelp(HsmCertifyDocument.class.toString() + " [OPTIONS]", options);
             return false;
         }
 
