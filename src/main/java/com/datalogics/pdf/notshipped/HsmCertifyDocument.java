@@ -109,7 +109,7 @@ public class HsmCertifyDocument {
         final File inputFile = new File(inputFilePath);
 
         // Log into the LunaSA HSM
-        if (!HSM_Manager.hsmLogin(tokenLabel, password)) {
+        if (!HsmManager.hsmLogin(tokenLabel, password)) {
             System.out.println("Failed to log into LunaSA");
             return;
         }
@@ -123,7 +123,7 @@ public class HsmCertifyDocument {
             run(inputFile, outputFilePath, credentials);
         } finally {
             // Log out of the LunaSA HSM
-            HSM_Manager.hsmLogout();
+            HsmManager.hsmLogout();
             System.out.println("Logged out of LunaSA HSM");
         }
     }
@@ -332,7 +332,7 @@ public class HsmCertifyDocument {
             || !line.hasOption(PASSWORD) || !line.hasOption(KEY)
             || !line.hasOption(CERT)) {
             ApplicationUtils.showHelp(options,
-                                      HSMCertifyDocument.class.toString());
+                                      HsmCertifyDocument.class.toString());
             return false;
         }
 
@@ -348,7 +348,7 @@ public class HsmCertifyDocument {
         } else {
             final File inputFile = new File(inputFilePath);
             outputFilePath = "output" + File.separator
-                             + HSMCertifyDocument.class.getSimpleName() + File.separator
+                             + HsmCertifyDocument.class.getSimpleName() + File.separator
                              + inputFile.getName();
         }
 
