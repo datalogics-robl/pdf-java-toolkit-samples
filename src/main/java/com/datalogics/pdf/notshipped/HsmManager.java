@@ -6,6 +6,7 @@ package com.datalogics.pdf.notshipped;
 
 import com.safenetinc.luna.LunaSlotManager;
 import com.safenetinc.luna.provider.LunaCertificateX509;
+import com.safenetinc.luna.provider.LunaProvider;
 
 // ****************************************************************************
 // Copyright (c) 2010 SafeNet, Inc. All rights reserved.
@@ -110,7 +111,7 @@ public class HsmManager {
     public static KeyPair getLunaHSMKey() throws Exception {
         if (Security.getProvider("LunaProvider") == null) {
             System.out.println("Adding LunaProvider");
-            Security.addProvider(new com.safenetinc.luna.provider.LunaProvider());
+            Security.addProvider(new LunaProvider());
         }
 
         KeyPairGenerator keyGen = null;
