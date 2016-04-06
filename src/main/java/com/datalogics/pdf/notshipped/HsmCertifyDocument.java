@@ -34,7 +34,8 @@ import com.adobe.pdfjt.services.digsig.SignatureOptionsDocMDP;
 import com.adobe.pdfjt.services.digsig.cryptoprovider.JCEProvider;
 import com.adobe.pdfjt.services.digsig.spi.CryptoContext;
 import com.adobe.pdfjt.services.xfa.XFAService;
-import com.adobe.pdfjt.test.util.DocumentUtils;
+
+import com.datalogics.pdf.samples.util.DocumentUtils;
 
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
@@ -46,6 +47,7 @@ import org.apache.commons.cli.ParseException;
 
 import java.io.File;
 import java.io.RandomAccessFile;
+import java.net.URL;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.Security;
@@ -82,12 +84,9 @@ public class HsmCertifyDocument {
     // Certificate label/alias
     //
     // If you don't want to enter the parameters at a command line, you can set these parameters here:
-    private static String inputFilePath = "input/simple.pdf"; // PDF to be certified
-    private static String outputFilePath = inputFilePath.replace("input",
-                                                                 "output/digsig/HSMCertifyDocument"); // Output
-                                                                                                      // directory to
-                                                                                                      // write certified
-                                                                                                      // PDF document
+    private static String inputFilePath = "/com/datalogics/pdf/samples/notshipped/simple.pdf"; // PDF to be certified
+    private static String outputFilePath = "HsmCertifyDocument.pdf";
+
     static String tokenLabel = null; // The HSM partition name or null
     static String password = ""; // The partition password
     static String privateKeyLabel = "pdfjt-eval-key"; // The private key label/alias
@@ -143,7 +142,8 @@ public class HsmCertifyDocument {
 
         try {
             // Get the PDF file to sign.
-            pdfDoc = DocumentUtils.openPdfDocument(inputFile.getPath());
+            final URL inputUrl = HsmCertifyDocument.class.getResource(inputFilePath);
+            pdfDoc = DocumentUtils.openPdfDocument(inputUrl);
 
             // Create an output file to hold the signed PDF data.
             final File outputFile = new File(outputFilePath);
