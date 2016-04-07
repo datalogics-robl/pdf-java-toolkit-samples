@@ -11,7 +11,7 @@
  * ***************************************************************************
  */
 
-package com.datalogics.pdf.notshipped;
+package com.datalogics.pdf.samples.notshipped;
 
 import com.adobe.internal.io.ByteWriter;
 import com.adobe.internal.io.RandomAccessFileByteWriter;

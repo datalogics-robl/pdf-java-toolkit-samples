@@ -2,7 +2,7 @@
  * Copyright 2015 Datalogics, Inc.
  */
 
-package com.datalogics.pdf.notshipped;
+package com.datalogics.pdf.samples.notshipped;
 
 import com.safenetinc.luna.LunaSlotManager;
 import com.safenetinc.luna.provider.LunaCertificateX509;

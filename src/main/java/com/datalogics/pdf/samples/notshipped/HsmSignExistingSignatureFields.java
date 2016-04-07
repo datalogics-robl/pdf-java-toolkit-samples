@@ -2,7 +2,7 @@
  * Copyright 2015 Datalogics, Inc.
  */
 
-package com.datalogics.pdf.notshipped;
+package com.datalogics.pdf.samples.notshipped;
 
 import com.adobe.internal.io.ByteReader;
 import com.adobe.internal.io.ByteWriter;
