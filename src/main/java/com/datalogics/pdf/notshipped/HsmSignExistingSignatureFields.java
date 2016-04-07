@@ -6,7 +6,6 @@ package com.datalogics.pdf.notshipped;
 
 import com.adobe.internal.io.ByteReader;
 import com.adobe.internal.io.ByteWriter;
-import com.adobe.internal.io.InputStreamByteReader;
 import com.adobe.internal.io.RandomAccessFileByteWriter;
 import com.adobe.pdfjt.core.credentials.CredentialFactory;
 import com.adobe.pdfjt.core.credentials.Credentials;
@@ -14,16 +13,17 @@ import com.adobe.pdfjt.core.license.LicenseManager;
 import com.adobe.pdfjt.core.securityframework.CryptoMode;
 import com.adobe.pdfjt.pdf.digsig.PDFSignatureSubFilter;
 import com.adobe.pdfjt.pdf.document.PDFDocument;
-import com.adobe.pdfjt.pdf.document.PDFOpenOptions;
 import com.adobe.pdfjt.services.digsig.SignatureFieldInterface;
 import com.adobe.pdfjt.services.digsig.SignatureManager;
 import com.adobe.pdfjt.services.digsig.SignatureOptions;
 import com.adobe.pdfjt.services.digsig.cryptoprovider.JCEProvider;
 import com.adobe.pdfjt.services.digsig.spi.CryptoContext;
 
+import com.datalogics.pdf.samples.util.DocumentUtils;
+
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.RandomAccessFile;
+import java.net.URL;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.Security;
@@ -62,9 +62,9 @@ public class HsmSignExistingSignatureFields {
     // 3) all fields but the "excluded" fields.
     // Hence we have the following three input files.
     // DLADD 27July2012 - remove "samples/" from input/output file paths
-    private static final String[] pdfFiles = { "input/digsig/FieldMDP_All.pdf",
-        "input/digsig/FieldMDP_Include.pdf",
-        "input/digsig/FieldMDP_Exclude.pdf" };
+    private static final String[] pdfFiles = { "/com/datalogics/pdf/samples/notshipped/FieldMDP_All.pdf",
+        "/com/datalogics/pdf/samples/notshipped/FieldMDP_Include.pdf",
+        "/com/datalogics/pdf/samples/notshipped/FieldMDP_Exclude.pdf" };
 
     // DLADD 31Jul2012 - add output path
     private static final String outputDir = "output/digsig/HSMSignExistingSignatureFields";
@@ -93,7 +93,7 @@ public class HsmSignExistingSignatureFields {
         for (int i = 0; i < pdfFiles.length; i++) {
             final String inputPath = pdfFiles[i];
             // DLADD 31Jul2012 - replace "output/digsig" with outputDir
-            final String outputPath = inputPath.replaceFirst("input/digsig", outputDir);
+            final String outputPath = inputPath.replaceFirst("/com/datalogics/pdf/samples/notshipped", outputDir);
 
             sign(inputPath, outputPath);
         }
@@ -111,14 +111,11 @@ public class HsmSignExistingSignatureFields {
         try {
 
             // Get the PDF file to sign.
-            final File file = new File(inputPath);
-
             // PDF documents require random access. This code
             // assumes it is ok to have the whole file in memory
             // to get the maximum performance
-            final FileInputStream fis = new FileInputStream(file);
-            byteReader = new InputStreamByteReader(fis);
-            pdfDoc = PDFDocument.newInstance(byteReader, PDFOpenOptions.newInstance());
+            final URL inputUrl = HsmCertifyDocument.class.getResource(inputPath);
+            pdfDoc = DocumentUtils.openPdfDocument(inputUrl);
             byteReader = null;
 
             // Set up the signing parameters.
