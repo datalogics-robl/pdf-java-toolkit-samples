@@ -2,14 +2,13 @@
  * Copyright 2015 Datalogics, Inc.
  */
 
-package com.datalogics.pdf.samples.creation;
+package com.datalogics.pdf.samples;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import com.adobe.pdfjt.pdf.document.PDFDocument;
 
-import com.datalogics.pdf.samples.SampleTest;
 import com.datalogics.pdf.samples.util.DocumentUtils;
 
 import org.junit.Test;

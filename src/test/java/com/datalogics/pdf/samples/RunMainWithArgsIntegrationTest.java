@@ -9,20 +9,8 @@ import static org.reflections.ReflectionUtils.withModifier;
 import static org.reflections.ReflectionUtils.withName;
 import static org.reflections.ReflectionUtils.withParameters;
 
-import com.datalogics.pdf.samples.creation.HelloWorld;
-import com.datalogics.pdf.samples.creation.MakePdfFromImage;
-import com.datalogics.pdf.samples.creation.MakeWhiteFangBook;
-import com.datalogics.pdf.samples.extraction.TextExtract;
-import com.datalogics.pdf.samples.forms.FillForm;
-import com.datalogics.pdf.samples.images.ImageDownsampling;
-import com.datalogics.pdf.samples.manipulation.ConvertPdfDocument;
-import com.datalogics.pdf.samples.manipulation.MergeDocuments;
-import com.datalogics.pdf.samples.manipulation.RedactAndSanitizeDocument;
-import com.datalogics.pdf.samples.manipulation.RemoveInteractivity;
 import com.datalogics.pdf.samples.printing.FakePrintService;
 import com.datalogics.pdf.samples.printing.FakePrinterJob;
-import com.datalogics.pdf.samples.printing.PrintPdf;
-import com.datalogics.pdf.samples.signature.SignDocument;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import mockit.Mock;
@@ -114,27 +102,6 @@ public class RunMainWithArgsIntegrationTest {
 
             {
                 put("HelloWorld", new String[] { OUTPUT_DIR + HelloWorld.OUTPUT_PDF_PATH });
-                put("MakePdfFromImage", new String[] { OUTPUT_DIR + MakePdfFromImage.OUTPUT_PDF,
-                    resourceDir + MakePdfFromImage.INPUT_BMP, resourceDir + MakePdfFromImage.INPUT_GIF });
-                put("MakeWhiteFangBook", new String[] { OUTPUT_DIR + MakeWhiteFangBook.OUTPUT_PDF_PATH });
-                // The sample input filename here includes a partial path, but we just want the filename itself.
-                final String extractInput = TextExtract.INPUT_PDF_PATH
-                                .substring(TextExtract.INPUT_PDF_PATH.lastIndexOf("/") + 1);
-                put("TextExtract", new String[] { resourceDir + extractInput,
-                    OUTPUT_DIR + TextExtract.OUTPUT_TEXT_PATH });
-                put("FillForm", new String[] { resourceDir + FillForm.ACROFORM_FDF_INPUT,
-                    resourceDir + FillForm.ACROFORM_FDF_DATA, OUTPUT_DIR + FillForm.ACROFORM_FDF_OUTPUT });
-                put("ImageDownsampling", new String[] { resourceDir + ImageDownsampling.INPUT_IMAGE_PATH,
-                    OUTPUT_DIR + ImageDownsampling.OUTPUT_IMAGE_PATH });
-                put("ConvertPdfDocument", new String[] { OUTPUT_DIR + ConvertPdfDocument.OUTPUT_CONVERTED_PDF_PATH });
-                put("RemoveInteractivity", new String[] { resourceDir + RemoveInteractivity.INPUT_PDF_PATH,
-                    OUTPUT_DIR + RemoveInteractivity.OUTPUT_PDF_PATH });
-                put("MergeDocuments", new String[] { OUTPUT_DIR + MergeDocuments.OUTPUT_PDF_PATH });
-                put("RedactAndSanitizeDocument", new String[] { resourceDir + RedactAndSanitizeDocument.INPUT_PDF_PATH,
-                    OUTPUT_DIR + RedactAndSanitizeDocument.OUTPUT_PDF_PATH,
-                    RedactAndSanitizeDocument.SEARCH_PDF_STRING });
-                put("PrintPdf", new String[] { resourceDir + PrintPdf.DEFAULT_INPUT });
-                put("SignDocument", new String[] { OUTPUT_DIR + SignDocument.OUTPUT_SIGNED_PDF_PATH });
             }
         };
 
